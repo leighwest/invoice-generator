@@ -13,6 +13,10 @@
   position: relative;
 }
 
+.form-input::placeholder {
+  font-style: italic;
+}
+
 label {
   display: block;
 }

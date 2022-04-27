@@ -3,8 +3,6 @@ import TextInput from '../Input/TextInput';
 import classes from './Address.module.css';
 
 const Address = props => {
-  debugger;
-  let someVar = props.messages['recipient'];
   return (
     <div>
       <h2>Address</h2>

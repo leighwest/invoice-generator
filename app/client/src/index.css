@@ -7,7 +7,7 @@ form {
   --color-content-active: #5081a6;
   --color-content-semi: #89b8dd;
   --color-content-inactive: #cfe3f0;
-  color: #999;
+  /* color: #999; */
 }
 
 * {
@@ -16,6 +16,7 @@ form {
 
 body {
   font-size: 18px;
+  color: #7182FF;
   /* width: 100vw; */
   /* height: 100vh; */
   /* background: rgb(47, 73, 118);
@@ -37,4 +38,9 @@ form {
   border-radius: 10px;
   /* background: white; */
   box-shadow: 0 10px 25px rgba(27, 37, 46, 0.5);
+}
+
+input::placeholder {
+  font-style: italic;
+  color: #aaa
 }
