@@ -7,7 +7,6 @@ form {
   --color-content-active: #5081a6;
   --color-content-semi: #89b8dd;
   --color-content-inactive: #cfe3f0;
-  /* color: #999; */
 }
 
 * {
@@ -17,27 +16,8 @@ form {
 body {
   font-size: 18px;
   color: #7182FF;
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* background: rgb(47, 73, 118);
-  background: linear-gradient(191deg,
-      rgba(47, 73, 118, 1) 19%,
-      rgba(26, 30, 65, 1) 100%); */
-}
-
-#root {
-  width: 100vw;
-  height: 100vh;
-  margin-top: 3em;
-}
-
-form {
-  /* width: 500px; */
-  /* padding: 1.5em; */
-  /* margin: 0 auto; */
-  border-radius: 10px;
-  /* background: white; */
-  box-shadow: 0 10px 25px rgba(27, 37, 46, 0.5);
+  margin: 0;
+  padding: 0;
 }
 
 input::placeholder {

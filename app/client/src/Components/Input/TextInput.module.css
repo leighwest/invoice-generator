@@ -1,20 +1,6 @@
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .form-input {
   padding: 1em 0;
   position: relative;
-}
-
-.form-input::placeholder {
-  font-style: italic;
 }
 
 label {

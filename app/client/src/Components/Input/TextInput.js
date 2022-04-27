@@ -22,7 +22,7 @@ const TextInput = ({
   return (
     <div className={`form-input ${classes[className]}`} > 
       <label htmlFor={name}>
-        <strong>{label}</strong>
+        <strong>{label.replace(/-/g, ' ')}</strong>
         {messages.length ? (
           <span className={classes['validation-message']}>{messages[0]}</span>
         ) : null}
