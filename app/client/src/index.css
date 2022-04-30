@@ -14,8 +14,9 @@ form {
 }
 
 body {
+  --color-purple: #7182FF;
   font-size: 18px;
-  color: #7182FF;
+  color: var(--color-purple);
   margin: 0;
   padding: 0;
 }

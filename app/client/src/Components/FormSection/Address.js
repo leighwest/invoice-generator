@@ -5,7 +5,7 @@ import classes from './Address.module.css';
 
 const Address = props => {
   return (
-    <div>
+    <div className={classes.wrapper}>
       <h2>Address</h2>
       <TextInput
         name="recipient"
