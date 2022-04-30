@@ -12,7 +12,7 @@ import formValidation from "./Validation/formValidation";
 import classes from './App.module.css';
 
 // this is bad practice:
-import './index.css';
+// import './index.css';
 
 export default function App() {
   const [formstate, setFormstate] = useState({});

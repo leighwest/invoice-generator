@@ -18,6 +18,10 @@ const formValidation = create((data = {}, currentField) => {
     enforce(data['suburb']).isNotEmpty();
   });
 
+  test("postcode", "Postcode is required", () => {
+    enforce(data['postcode']).isNotEmpty();
+  });
+
 
   
 //   skipWhen(

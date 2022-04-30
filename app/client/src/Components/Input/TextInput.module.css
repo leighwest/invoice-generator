@@ -81,3 +81,24 @@ input:focus {
   border: 1px solid var(--color-error);
   color: var(--color-error);
 }
+
+
+
+
+/* Applies to dropdown / select */
+select {
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-content-inactive);
+  background: #fbfbfb;
+  width: 100%;
+  font-size: 0.9em;
+  padding: 15px 0;
+  outline: none;
+  cursor: pointer;
+  color: var(--color-success)
+}
+
+.bottomRow {
+  margin-right: 10px; 
+}
