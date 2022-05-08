@@ -10,8 +10,8 @@ const formValidation = create((data = {}, currentField) => {
     enforce(data.recipient).longerThan(2);
   });
 
-  test("street-address", "Street address is required", () => {
-    enforce(data['street-address']).isNotEmpty();
+  test("streetAddress", "Street address is required", () => {
+    enforce(data['streetAddress']).isNotEmpty();
   });
 
   test("suburb", "Suburb is required", () => {

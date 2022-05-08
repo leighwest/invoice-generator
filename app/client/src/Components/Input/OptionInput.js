@@ -1,7 +1,6 @@
 import React from "react";
 
 import classes from './TextInput.module.css'
-// import '../../index.css';
 
 const OptionInput = ({
   name,
@@ -16,8 +15,6 @@ const OptionInput = ({
   const handleChange = e => {
     onChange(name, e.target.value);
   }
-
-  // console.log(`className is ${className}`);
 
   return (
     <div className={`form-input ${classes[className]}`} > 
@@ -35,12 +32,6 @@ const OptionInput = ({
           <option value="sa">SA</option>
           <option value="nt">NT</option>
           <option value="wa">WA</option>
-        {/* name={name}
-        onChange={handleChange}
-        autoComplete="off"
-        autoCorrect="off"
-        value={value}
-        placeholder={`i.e. ${placeholder}`} */}
       </select>
     </div>
   );

@@ -6,4 +6,6 @@
   margin: 0 auto;
   margin-top: 150px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }

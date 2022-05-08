@@ -15,11 +15,12 @@ const Address = props => {
         className={props.cn('recipient')}
       />
       <TextInput
-        name="street-address"
+        name="streetAddress"
+        label = "street address"
         onChange={props.handleChange}
-        messages={props.messages['street-address']}
+        messages={props.messages['streetAddress']}
         placeholder='57 Ford Street'
-        className={props.cn('street-address')}
+        className={props.cn('streetAddress')}
       />
       <div className={classes.suburbRow}>
         <TextInput
@@ -27,12 +28,10 @@ const Address = props => {
           onChange={props.handleChange}
           messages={props.messages['suburb']}
           placeholder='Ivanhoe'
-          // className={`${props.cn('suburb')} bottomRow`}
           className={{
             cn: props.cn('suburb'),
             bottomRow:"bottomRow"
           }}
-
         />
         <OptionInput
           name="state"
