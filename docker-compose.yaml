@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+  dbt-server:
+    build:
+      context: ./app/server
+      dockerfile: Dockerfile
+    # volumes:
+    #   # - ./app/server/node_modules    (complains that path is not abolute?)
+    #   - /home/vagrant/Desktop/Projects/invoice-generator/app/server
+    #   - ./app/server:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=password
+      - CHOKIDAR_USEPOLLING=true
+  # dbt-client:
+  #   build:
+  #     context: ../app/client
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - dbt-server
+  #   stdin_open: true
+  #   tty: true
+  #   volumes:
+  #     - ../app/node_modules
+  #     - ./client:/app
+  #   ports:
+  #     - "8080:8080"
+  #   links:
+  #     - dbt-server
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - PORT=8080
+volumes:
+  mongodb:
