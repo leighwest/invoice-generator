@@ -37,6 +37,8 @@ In the body of your JSON request, submit the following data:
 }
 ```
 
+Send the POST request to: http://localhost:49160/api/invoice
+
 ### Expected response
 
 201 Created
