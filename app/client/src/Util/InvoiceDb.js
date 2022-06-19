@@ -7,7 +7,7 @@ const InvoiceDb = {
     headers.append('Origin','http://localhost:3000');
 
     try {
-      const response = await fetch('http://localhost:8080/api/invoice', {
+      const response = await fetch('http://localhost:49160/api/invoice', {
       method: "POST",
       mode: 'cors',
       headers: headers,

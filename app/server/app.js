@@ -13,6 +13,6 @@ app.use((req, res, next) => {
 });
 
 const invoiceRoutes = require('./routes/invoice');
-app.use('/api', invoiceRoutes)
+app.use('/', invoiceRoutes)
 
 app.listen(8080);
