@@ -2,6 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+const webpack = require('webpack');
+const webpackConfig = require('./webpack');
+
+// webpack(webpackConfig);
+
+require('@babel/register')({
+    ignore: [/(node_modules)/],
+    presets: ['@babel/preset-env', '@babel/preset-react']
+});
+
 
 app.use(bodyParser.json()); // application/json
 

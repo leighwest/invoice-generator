@@ -1,15 +1,30 @@
 const puppeteer = require('puppeteer');
 
-const invoiceGenerator = async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://news.ycombinator.com', {
-    waitUntil: 'networkidle2',
-  });
-  const pdfToSend = await page.pdf({ path: 'hn.pdf', format: 'a4' });
+const templateService = require('./templateService');
+const template = require('../template/invoice.jsx');
+var ReactDOMServer = require('react-dom/server');
+const React = require('react');
 
-  await browser.close();
-  return pdfToSend;
+
+
+
+const invoiceGenerator = async (address) => {
+  // const browser = await puppeteer.launch();
+  // const page = await browser.newPage();
+  // const template = templateService(address);
+
+
+  // await page.setContent(template);
+
+
+  // const pdfToSend = await page.pdf({ path: 'hn.pdf', format: 'a4' });
+
+  // await browser.close();
+  // return pdfToSend;
+
+  console.log(address);
+
+  return templateService(address);
 };
 
 module.exports = invoiceGenerator;
