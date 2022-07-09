@@ -9,22 +9,17 @@ const React = require('react');
 
 
 const invoiceGenerator = async (address) => {
-  // const browser = await puppeteer.launch();
-  // const page = await browser.newPage();
-  // const template = templateService(address);
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  const template = templateService(address);
 
+  await page.setContent(template);
 
-  // await page.setContent(template);
+  const pdfToSend = await page.pdf({ path: 'hn.pdf', format: 'a4' });
 
+  await browser.close();
 
-  // const pdfToSend = await page.pdf({ path: 'hn.pdf', format: 'a4' });
-
-  // await browser.close();
-  // return pdfToSend;
-
-  console.log(address);
-
-  return templateService(address);
+  return pdfToSend;
 };
 
 module.exports = invoiceGenerator;

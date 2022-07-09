@@ -6,13 +6,6 @@ exports.createInvoice = async (req, res, next) => {
 
   const address = req.body.address;
 
-  // TODO: Create invoice in db
-  // class.createInvoice(req.body)
-
-  // res.status(201).json({
-  //   message: 'Invoice created successfully!',
-  //   post: { id: new Date().toISOString(), title: title, content: content }
-  // });
   const invoice = await invoiceGenerator(address);
   res.send(invoice);
 }

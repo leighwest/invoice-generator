@@ -10,6 +10,7 @@ var ReactDOMServer = require('react-dom/server');
 
 const templateService = (address) => {
     // const htmlElement = ReactDOMServer.renderToStaticMarkup(element);
+    console.log(address.recipient)
 
     var html = ReactDOMServer.renderToString(
         React.createElement(template, address)
