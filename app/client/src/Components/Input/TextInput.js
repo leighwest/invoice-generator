@@ -1,7 +1,6 @@
 import React from "react";
 
 import classes from './TextInput.module.css'
-// import '../../index.css';
 
 const TextInput = ({
   name,
