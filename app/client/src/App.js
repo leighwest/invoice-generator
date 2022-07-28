@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from './Components/UI/Card';
 import Button from './Components/UI/Button';
 import Address from './Components/FormSection/Address';
@@ -12,9 +12,6 @@ import formValidation from './Validation/formValidation';
 import InvoiceDb from './Util/InvoiceDb';
 
 import classes from './App.module.css';
-
-
-
 
 
 export default function App() {
@@ -33,8 +30,6 @@ export default function App() {
     const result = formValidation(nextState, currentField);
     setFormstate(nextState);
   };
-
-
 
 
   const handleSubmit = event => {
@@ -67,7 +62,11 @@ export default function App() {
           messages={res.getErrors()}
           cn={cn}
         />
-        <Date />
+        <Date 
+          handleChange={handleChange}
+          messages={res.getErrors()}
+          cn={cn}
+        />
         {/* <Submit disabled={!res.isValid()} /> */}
         <Button class={"create-invoice-btn"} onClick={handleSubmit} buttonText='generate invoice' />
       </Card>

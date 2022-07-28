@@ -1,4 +1,4 @@
-import { create, test, enforce, only } from "vest";
+import { create, test, enforce, only, warn } from "vest";
 
 const formValidation = create((data = {}, currentField) => {
   only(currentField);
@@ -20,6 +20,22 @@ const formValidation = create((data = {}, currentField) => {
 
   test("postcode", "Postcode is required", () => {
     enforce(data['postcode']).isNotEmpty();
+  });
+
+  test("dateIssued", "Date issued more than 1 year ago", () => {
+    // warn();
+    // debugger
+    // console.log(data.dateIssued)
+    const dateIssued = new Date(data.dateIssued);
+    const todayDate = new Date();
+
+    // console.log(dateIssued.getTime() >= (todayDate.getTime() - 31536000730))
+    
+    enforce(dateIssued.getTime() >= (todayDate.getTime() - 31536000730)).isTruthy();
+  });
+
+  test("dateIssued", "Date must not be empty", () => {
+    enforce(data['dateIssued']).isNotEmpty();
   });
 
 

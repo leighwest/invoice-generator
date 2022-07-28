@@ -17,6 +17,7 @@ const TextInput = ({
   const handleChange = e => {
     onChange(name, e.target.value);
   }
+
   
   return (
     <div className={(Object.keys(className).length === 2) ? (`form-input ${classes[cn]} ${classes[bottomRow]}`) : (`form-input ${classes[className]}`) }> 
