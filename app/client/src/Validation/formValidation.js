@@ -1,4 +1,4 @@
-import { create, test, enforce, only, warn } from "vest";
+import { create, test, enforce, only, warn, warn } from "vest";
 
 const formValidation = create((data = {}, currentField) => {
   only(currentField);
@@ -28,34 +28,35 @@ const formValidation = create((data = {}, currentField) => {
 
   test("dateIssued", "Date issued more than 1 year ago", () => {
     // warn();
+    // debugger
     // console.log(data.dateIssued)
     const dateIssued = new Date(data.dateIssued);
     const todayDate = new Date();
 
     // console.log(dateIssued.getTime() >= (todayDate.getTime() - 31536000730))
-
-    enforce(
-      dateIssued.getTime() >= todayDate.getTime() - 31536000730
-    ).isTruthy();
+    
+    enforce(dateIssued.getTime() >= (todayDate.getTime() - 31536000730)).isTruthy();
   });
 
   test("dateIssued", "Date must not be empty", () => {
-    enforce(data["dateIssued"]).isNotEmpty();
+    enforce(data['dateIssued']).isNotEmpty();
   });
 
-  //   skipWhen(
-  //     (res) => res.hasErrors("username"),
-  //     () => {
-  //       test.memo(
-  //         "username",
-  //         "Username already taken",
-  //         () => {
-  //           return doesUserExist(data.username);
-  //         },
-  //         [data.username]
-  //       );
-  //     }
-  //   );
+
+  
+//   skipWhen(
+//     (res) => res.hasErrors("username"),
+//     () => {
+//       test.memo(
+//         "username",
+//         "Username already taken",
+//         () => {
+//           return doesUserExist(data.username);
+//         },
+//         [data.username]
+//       );
+//     }
+//   );
 
   //   test("password", "Password is required", () => {
   //     enforce(data.password).isNotEmpty();
@@ -71,6 +72,24 @@ const formValidation = create((data = {}, currentField) => {
   //   test("confirm", "Passwords do not match", () => {
   //     enforce(data.confirm).equals(data.password);
   //   });
+=======
+  test("dateIssued", "Date issued more than 1 year ago", () => {
+    // warn();
+    // debugger
+    // console.log(data.dateIssued)
+    const dateIssued = new Date(data.dateIssued);
+    const todayDate = new Date();
+
+    // console.log(dateIssued.getTime() >= (todayDate.getTime() - 31536000730))
+    
+    enforce(dateIssued.getTime() >= (todayDate.getTime() - 31536000730)).isTruthy();
+  });
+
+  test("dateIssued", "Date must not be empty", () => {
+    enforce(data['dateIssued']).isNotEmpty();
+  });
+
+>>>>>>> 87ed3c1b85fe44c515671317a166a704d09fdee6
 
   //   test("tos", () => {
   //     enforce(data.tos).isTruthy();
