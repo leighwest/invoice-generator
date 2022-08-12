@@ -59,9 +59,6 @@ export default function App() {
         },
       ],
     };
-    console.log(
-      `In App.js state is ${invoice.address.state}, postcode is: ${invoice.address.postcode}`
-    );
 
     InvoiceDb.createInvoice(invoice).then((res) => {
       if (res.errorMessage) {

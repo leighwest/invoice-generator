@@ -28,7 +28,7 @@ const Date = (props) => {
           className={props.cn("dateIssued")}
         />
         <DateInput
-          name="date due"
+          name="dateDue"
           label="date due"
           onChange={props.handleChange}
           messages={props.messages["dateDue"]}

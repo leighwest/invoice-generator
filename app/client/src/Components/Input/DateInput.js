@@ -40,7 +40,6 @@ const DateInput = ({
   const [date, setDate] = useState(null);
 
   return (
-    // <StyledDateInputWrapper className={`form-input ${classes[className]}`}>
     <StyledDateInputWrapper className={classes[className]}>
       <label htmlFor={name}>
         <strong>{label}</strong>
