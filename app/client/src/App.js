@@ -6,9 +6,6 @@ import Button from "./Components/UI/Button";
 import Address from "./Components/FormSection/Address";
 import Date from "./Components/FormSection/Date";
 import Service from "./Components/FormSection/Service";
-// import Input from "./components/Input";
-// import Checkbox from "./components/Checkbox";
-// import Submit from "./components/Submit";
 
 import classnames from "vest/classnames";
 import formValidation from "./Validation/formValidation";
@@ -62,7 +59,6 @@ export default function App() {
         },
       ],
     };
-    console.log("HERE");
     console.log(
       `In App.js state is ${invoice.address.state}, postcode is: ${invoice.address.postcode}`
     );

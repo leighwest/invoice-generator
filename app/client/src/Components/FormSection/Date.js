@@ -27,7 +27,14 @@ const Date = (props) => {
           placeholder="Enter date issued"
           className={props.cn("dateIssued")}
         />
-        <DateInput name="date due" />
+        <DateInput
+          name="date due"
+          label="date due"
+          onChange={props.handleChange}
+          messages={props.messages["dateDue"]}
+          placeholder="Enter date due"
+          className={props.cn("dateDue")}
+        />
       </DateInputWrapper>
     </DateInputSectionWrapper>
   );
