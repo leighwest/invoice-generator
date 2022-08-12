@@ -1,22 +1,23 @@
-.form-input {
+.form-element {
   padding: 1em 0;
   position: relative;
+  width: 100%;
 }
 
-label {
+/* label {
   display: block;
 }
 
 strong {
   text-transform: capitalize;
-}
+} */
 
 .validation-message {
   font-weight: 400;
   float: right;
 }
 
-input {
+/* input {
   border-radius: 5px;
   box-sizing: border-box;
   border: 1px solid var(--color-content-inactive);
@@ -27,7 +28,7 @@ input {
   outline: none;
   transition: 0.2s;
   color: var(--color-content-active);
-}
+} */
 
 /* .form-input.pending::after {
   content: "";
@@ -82,11 +83,8 @@ input:focus {
   color: var(--color-error);
 }
 
-
-
-
 /* Applies to dropdown / select */
-select {
+/* select {
   border-radius: 5px;
   box-sizing: border-box;
   border: 1px solid var(--color-content-inactive);
@@ -96,9 +94,5 @@ select {
   padding: 15px 0;
   outline: none;
   cursor: pointer;
-  color: var(--color-success)
-}
-
-.bottomRow {
-  margin-right: 10px; 
-}
+  color: var(--color-success);
+} */

@@ -1,22 +1,23 @@
-var ReactDOMServer = require('react-dom/server');
-const template = require('../template/invoice.jsx');
+var ReactDOMServer = require("react-dom/server");
+const template = require("../template/invoice.jsx");
 
-require('babel-register')({
-    presets: ['react']
+require("babel-register")({
+  presets: ["react"],
 });
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
+const templateService = (invoiceData) => {
+  // const htmlElement = ReactDOMServer.renderToStaticMarkup(element);
+  console.log(invoiceData.address.recipient);
+  console.log(invoiceData.address.streetAddress);
+  console.log(invoiceData.address.suburb);
 
-const templateService = (address) => {
-    // const htmlElement = ReactDOMServer.renderToStaticMarkup(element);
-    console.log(address.recipient)
+  var html = ReactDOMServer.renderToString(
+    React.createElement(template, invoiceData)
+  );
 
-    var html = ReactDOMServer.renderToString(
-        React.createElement(template, address)
-    );
-
-    return html;
-}
+  return html;
+};
 
 module.exports = templateService;
