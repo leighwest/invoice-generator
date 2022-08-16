@@ -1,7 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import classes from "./TextInput.module.css";
+import classes from './TextInput.module.css';
+
+const StyledTextInputWrapper = styled.div`
+  width: 100%;
+`;
 
 const Input = styled.input`
   border-radius: 5px;
@@ -31,11 +35,11 @@ const TextInput = ({
   };
 
   return (
-    <div className={className}>
+    <StyledTextInputWrapper className={className}>
       <label htmlFor={name}>
-        <strong>{label.replace(/-/g, " ")}</strong>
+        <strong>{label.replace(/-/g, ' ')}</strong>
         {messages.length ? (
-          <span className={classes["validation-message"]}>{messages[0]}</span>
+          <span className={classes['validation-message']}>{messages[0]}</span>
         ) : null}
       </label>
       <Input
@@ -47,7 +51,7 @@ const TextInput = ({
         placeholder={`i.e. ${placeholder}`}
         type={type}
       />
-    </div>
+    </StyledTextInputWrapper>
   );
 };
 

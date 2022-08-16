@@ -1,33 +1,33 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import TextInput from "../Input/TextInput";
+import TextInput from '../Input/TextInput';
 
 const ServiceInputWrapper = styled.div`
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* width: 100%; */
-  /* column-gap: 10px; */
+  justify-content: space-between;
+  column-gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-purple);
 `;
 
 const Service = (props) => {
   return (
-    <div className={"wrapper"}>
+    <div className={'wrapper'}>
       <h2>Service</h2>
       <ServiceInputWrapper>
         <TextInput
           name="description"
           onChange={props.handleChange}
-          messages={props.messages["description"]}
+          messages={props.messages['description']}
           placeholder="Interior window clean"
-          className={props.cn("description")}
+          className={props.cn('description')}
         />
         <TextInput
           name="cost"
           onChange={props.handleChange}
-          messages={props.messages["cost"]}
+          messages={props.messages['cost']}
           placeholder="210"
-          className={"form-element"}
+          className={'form-element'}
           type="number"
         />
       </ServiceInputWrapper>
