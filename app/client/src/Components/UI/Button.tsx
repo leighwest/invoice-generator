@@ -17,9 +17,12 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button: React.FC<{ buttonText: string[]; onClick: () => void }> = (
-  props,
-) => {
+type Props = {
+  buttonText: string[];
+  onClick: () => void;
+};
+
+const Button: React.FC<Props> = (props) => {
   return (
     <>
       <StyledButton

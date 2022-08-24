@@ -8,5 +8,5 @@ test('renders "Test card"', () => {
     </Card>,
   );
 
-  expect(screen.getByText('Test card')).not.toBeNull();
+  expect(screen.getByText('Test card')).toBeInTheDocument();
 });
