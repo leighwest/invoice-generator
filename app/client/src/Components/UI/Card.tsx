@@ -12,7 +12,7 @@ const StyledCard = styled.div`
   flex-direction: column;
 `;
 
-const Card: React.FC<{ children: JSX.Element }> = (props) => {
+const Card: React.FC<{ children: JSX.Element | JSX.Element[] }> = (props) => {
   return <StyledCard>{props.children}</StyledCard>;
 };
 

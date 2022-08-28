@@ -18,11 +18,11 @@ const StyledButton = styled.button`
 `;
 
 type Props = {
-  buttonText: string[];
-  onClick: () => void;
+  buttonText: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: React.FC<Props> = (props) => {
+const Button = (props: Props) => {
   return (
     <>
       <StyledButton

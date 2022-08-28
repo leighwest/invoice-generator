@@ -8,5 +8,5 @@ test('Initial conditions', () => {
   const confirmButton = screen.getByRole('button', {
     name: /generate invoice/i,
   });
-  expect(confirmButton).not.toBeDisabled();
+  expect(confirmButton).toBeEnabled();
 });

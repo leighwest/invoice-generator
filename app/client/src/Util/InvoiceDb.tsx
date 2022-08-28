@@ -1,5 +1,7 @@
+import { Invoice } from '../Models/InvoiceModel';
+
 const InvoiceDb = {
-  async createInvoice(invoice) {
+  async createInvoice(invoice: Invoice) {
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
@@ -8,18 +10,18 @@ const InvoiceDb = {
 
     try {
       const response = await fetch('http://localhost:8080/invoice', {
-        method: "POST",
+        method: 'POST',
         mode: 'cors',
         headers: headers,
-        body: JSON.stringify(invoice)
+        body: JSON.stringify(invoice),
       });
 
       const data = await response.json();
-      return data
+      return data;
     } catch (error) {
       return error;
     }
-  }
-}
+  },
+};
 
 export default InvoiceDb;
