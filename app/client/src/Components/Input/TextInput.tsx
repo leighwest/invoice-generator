@@ -1,7 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import classes from './TextInput.module.css';
+import React from 'react';
+import { TextInputProps } from '../formTypes';
 
 const StyledTextInputWrapper = styled.div`
   width: 100%;
@@ -29,13 +30,13 @@ const TextInput = ({
   className,
   placeholder,
   type,
-}) => {
-  const handleChange = (e) => {
+}: TextInputProps): JSX.Element => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(name, e.target.value);
   };
 
   return (
-    <StyledTextInputWrapper className={className}>
+    <StyledTextInputWrapper>
       <label htmlFor={name}>
         <strong>{label.replace(/-/g, ' ')}</strong>
         {messages.length ? (

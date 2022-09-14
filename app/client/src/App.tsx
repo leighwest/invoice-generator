@@ -13,6 +13,7 @@ import { Invoice } from './Models/InvoiceModel';
 import classnames from 'vest/classnames';
 import formValidation from './Validation/formValidation';
 import InvoiceDb from './Util/InvoiceDb';
+import { SuiteResult } from 'vest';
 
 // import classes from './App.module.css';
 
@@ -35,7 +36,7 @@ const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
 export default function App() {
   const [formstate, setFormstate] = useState<any>({});
 
-  const res = formValidation.get();
+  const res: SuiteResult = formValidation.get();
 
   const cn = classnames(res, {
     invalid: 'error',
@@ -69,11 +70,9 @@ export default function App() {
       ],
     };
 
-    InvoiceDb.createInvoice(invoice).then((res) => {
-      if (res.errorMessage) {
-        console.log(`createInvoice returned an error: ${res.errorMessage}`);
-      } else {
-        console.log(res);
+    InvoiceDb.createInvoice(invoice).then((response: any) => {
+      if (response && response!.message) {
+        console.error(`createInvoice returned an error: ${response.message}`);
       }
     });
   };

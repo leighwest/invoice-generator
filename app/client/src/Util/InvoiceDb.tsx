@@ -1,22 +1,23 @@
 import { Invoice } from '../Models/InvoiceModel';
+import { BASEURL } from '../constants';
 
 const InvoiceDb = {
-  async createInvoice(invoice: Invoice) {
-    let headers = new Headers();
+  async createInvoice(invoice: Invoice): Promise<string | unknown> {
+    let headers: Headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-    headers.append('Origin', 'http://localhost:3000');
+    headers.append('Origin', `${BASEURL}3000`);
 
     try {
-      const response = await fetch('http://localhost:8080/invoice', {
+      const response: Response = await fetch(`${BASEURL}8080/invoice`, {
         method: 'POST',
         mode: 'cors',
         headers: headers,
         body: JSON.stringify(invoice),
       });
 
-      const data = await response.json();
+      const data: string = await response.json();
       return data;
     } catch (error) {
       return error;
