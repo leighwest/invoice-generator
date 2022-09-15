@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { InputProps } from '../formTypes';
 
-import classes from "./TextInput.module.css";
+import classes from './TextInput.module.css';
 
 const Select = styled.select`
   border-radius: 5px;
@@ -24,22 +25,22 @@ const OptionInput = ({
   value,
   className,
   placeholder,
-}) => {
-  const handleChange = (e) => {
-    console.log(`in optioninpute e.target.value is: ${e.target.value}`);
+}: InputProps): JSX.Element => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(name, e.target.value);
   };
 
   return (
-    // <div className={`form-input ${classes[className]}`}>
     <div className={classes[className]}>
       <label htmlFor={name}>
         <strong>{label}</strong>
         {messages.length ? (
-          <span className={classes["validation-message"]}>{messages[0]}</span>
+          <span className={classes['validation-message']}>{messages[0]}</span>
         ) : null}
       </label>
-      <Select id="state" onChange={handleChange}>
+      <Select
+        id="state"
+        onChange={handleChange}>
         <option value="vic">VIC</option>
         <option value="nsw">NSW</option>
         <option value="nsw">QLD</option>

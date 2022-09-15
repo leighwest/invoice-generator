@@ -1,4 +1,4 @@
-export type TextInputProps = {
+export type InputProps = {
   name: string;
   label: string;
   onChange: (name: string, e: string) => {};
