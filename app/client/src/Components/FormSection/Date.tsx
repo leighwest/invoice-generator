@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { InputProps } from './formSectionTypes';
 
 import DateInput from '../Input/DateInput';
 
@@ -10,7 +11,7 @@ const DateInputWrapper = styled.div`
   border-bottom: 2px solid var(--color-purple);
 `;
 
-const Date = (props) => {
+const Date = (props: InputProps) => {
   return (
     <>
       <h2>Date</h2>

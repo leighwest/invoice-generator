@@ -1,4 +1,4 @@
-import { Invoice } from '../Models/InvoiceModel';
+import { Invoice } from 'Models/InvoiceModel';
 import { BASEURL } from '../constants';
 
 const InvoiceDb = {
