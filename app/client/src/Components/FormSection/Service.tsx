@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import TextInput from '../Input/TextInput';
+import { InputProps } from './formSectionTypes';
 
 const ServiceInputWrapper = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const ServiceInputWrapper = styled.div`
   border-bottom: 2px solid var(--color-purple);
 `;
 
-const Service = (props) => {
+const Service = (props: InputProps) => {
   return (
     <div className={'wrapper'}>
       <h2>Service</h2>

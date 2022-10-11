@@ -10,7 +10,8 @@
   "author": "Leigh West",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
     "@babel/core": "^7.18.5",
