@@ -15,7 +15,7 @@ import formValidation from './Validation/formValidation';
 import InvoiceDb from './Util/InvoiceDb';
 import { SuiteResult } from 'vest';
 
-// import classes from './App.module.css';
+import AuthForm from 'Components/Auth/AuthForm';
 
 const GlobalStyle = createGlobalStyle`
 label {
@@ -78,33 +78,36 @@ export default function App() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Wrapper>
-        <Card>
-          <GlobalStyle />
-          <Address
-            handleChange={handleChange}
-            messages={res.getErrors()}
-            cn={cn}
-          />
-          <Date
-            handleChange={handleChange}
-            messages={res.getErrors()}
-            cn={cn}
-          />
-          <Service
-            handleChange={handleChange}
-            messages={res.getErrors()}
-            cn={cn}
-          />
-          {/* <Submit disabled={!res.isValid()} /> */}
-          <Button
-            // class={'create-invoice-btn'}
-            onClick={handleSubmit}
-            buttonText="generate invoice"
-          />
-        </Card>
-      </Wrapper>
-    </form>
+    // <Wrapper>
+    //   <form onSubmit={handleSubmit}>
+    //     <Card>
+    //       <GlobalStyle />
+    //       <Address
+    //         handleChange={handleChange}
+    //         messages={res.getErrors()}
+    //         cn={cn}
+    //       />
+    //       <Date
+    //         handleChange={handleChange}
+    //         messages={res.getErrors()}
+    //         cn={cn}
+    //       />
+    //       <Service
+    //         handleChange={handleChange}
+    //         messages={res.getErrors()}
+    //         cn={cn}
+    //       />
+    //       {/* <Submit disabled={!res.isValid()} /> */}
+    //       <Button
+    //         // class={'create-invoice-btn'}
+    //         onClick={handleSubmit}
+    //         buttonText="generate invoice"
+    //       />
+    //     </Card>
+    //   </form>
+    // </Wrapper>
+    <Wrapper>
+      <AuthForm />
+    </Wrapper>
   );
 }
