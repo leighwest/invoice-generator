@@ -75,6 +75,17 @@ const ToggleButton = styled.button`
   }
 `;
 
+const passwordValidator = (password: string, password2: string): string => {
+  let response = '';
+  console.log(password, password2);
+
+  if (password.localeCompare(password2)) {
+    response = 'Entered passwords do not match. Please try again.';
+  }
+
+  return response;
+};
+
 const AuthForm = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -93,10 +104,18 @@ const AuthForm = () => {
     const enteredPassword = passwordInputRef.current!.value;
     const reEnteredPassword = passwordReEnterInputRef.current!.value;
 
-    // TODO: Add validation
+    const passwordValidationMessage = passwordValidator(
+      enteredPassword,
+      reEnteredPassword,
+    );
+
+    if (passwordValidationMessage) {
+      // display modal with message
+      console.log(passwordValidationMessage);
+      return;
+    }
 
     const URL: string = process.env.REACT_APP_NEW_USER_URL!;
-    console.log(`URL is: ${URL}`);
 
     if (isLogin) {
     } else {
