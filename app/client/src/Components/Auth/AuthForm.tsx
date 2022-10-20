@@ -76,14 +76,53 @@ const ToggleButton = styled.button`
 `;
 
 const AuthForm = () => {
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
-  const passwordReEnterInputRef = useRef(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const passwordReEnterInputRef = useRef<HTMLInputElement>(null);
 
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
     setIsLogin((current) => !current);
+  };
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const enteredEmail: string = emailInputRef.current!.value;
+    const enteredPassword = passwordInputRef.current!.value;
+    const reEnteredPassword = passwordReEnterInputRef.current!.value;
+
+    // TODO: Add validation
+
+    const URL: string = process.env.REACT_APP_NEW_USER_URL!;
+    console.log(`URL is: ${URL}`);
+
+    if (isLogin) {
+    } else {
+      console.log('button clicked');
+      fetch(URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => {
+        if (res.ok) {
+          // handle success
+          console.log('success');
+        } else {
+          return res.json().then((data) => {
+            // show an error modal
+            console.log(data);
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -106,7 +145,7 @@ const AuthForm = () => {
             ref={passwordInputRef}
           />
         </InputDiv>
-        {isLogin && (
+        {!isLogin && (
           <InputDiv>
             <label htmlFor="password">Re-enter Password</label>
             <input
@@ -117,7 +156,7 @@ const AuthForm = () => {
           </InputDiv>
         )}
         <ActionDiv>
-          <button onClick={() => console.log('clicked')}>
+          <button onClick={submitHandler}>
             {isLogin ? 'Login' : 'Create Account'}
           </button>
         </ActionDiv>
