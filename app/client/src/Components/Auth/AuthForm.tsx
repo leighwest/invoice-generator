@@ -75,7 +75,10 @@ const ToggleButton = styled.button`
   }
 `;
 
-const passwordValidator = (password: string, password2: string): string => {
+export const passwordValidator = (
+  password: string,
+  password2: string,
+): string => {
   let response = '';
   console.log(password, password2);
 
