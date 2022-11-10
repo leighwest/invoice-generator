@@ -82,7 +82,7 @@ export const passwordValidator = (
   let response = '';
   console.log(password, password2);
 
-  if (password.localeCompare(password2)) {
+  if (password !== password2) {
     response = 'Entered passwords do not match. Please try again.';
   }
 
@@ -150,13 +150,14 @@ const AuthForm = () => {
   return (
     <StyledSection>
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-      <form>
+      <form onSubmit={submitHandler}>
         <InputDiv>
           <label htmlFor="email">Enter Email</label>
           <input
             type="email"
             id="email"
             ref={emailInputRef}
+            required
           />
         </InputDiv>
         <InputDiv>
@@ -165,6 +166,7 @@ const AuthForm = () => {
             type="password"
             id="password"
             ref={passwordInputRef}
+            required
           />
         </InputDiv>
         {!isLogin && (
@@ -174,11 +176,15 @@ const AuthForm = () => {
               type="password"
               id="reEnterPassword"
               ref={passwordReEnterInputRef}
+              required
             />
           </InputDiv>
         )}
         <ActionDiv>
-          <button onClick={submitHandler}>
+          <button
+            // onClick={submitHandler}
+
+            type="submit">
             {isLogin ? 'Login' : 'Create Account'}
           </button>
         </ActionDiv>

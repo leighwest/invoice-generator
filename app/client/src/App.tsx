@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { createGlobalStyle, StyledComponent } from 'styled-components'; // applies to entire project
 import styled from 'styled-components';
 
@@ -78,36 +79,53 @@ export default function App() {
   };
 
   return (
-    // <Wrapper>
-    //   <form onSubmit={handleSubmit}>
-    //     <Card>
-    //       <GlobalStyle />
-    //       <Address
-    //         handleChange={handleChange}
-    //         messages={res.getErrors()}
-    //         cn={cn}
-    //       />
-    //       <Date
-    //         handleChange={handleChange}
-    //         messages={res.getErrors()}
-    //         cn={cn}
-    //       />
-    //       <Service
-    //         handleChange={handleChange}
-    //         messages={res.getErrors()}
-    //         cn={cn}
-    //       />
-    //       {/* <Submit disabled={!res.isValid()} /> */}
-    //       <Button
-    //         // class={'create-invoice-btn'}
-    //         onClick={handleSubmit}
-    //         buttonText="generate invoice"
-    //       />
-    //     </Card>
-    //   </form>
-    // </Wrapper>
     <Wrapper>
-      <AuthForm />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Navigate
+              replace
+              to="/login"
+            />
+          }></Route>
+        <Route
+          index
+          path="/login"
+          element={<AuthForm />}
+        />
+        <Route
+          path="/create-invoice"
+          element={
+            <form onSubmit={handleSubmit}>
+              <Card>
+                <GlobalStyle />
+                <Address
+                  handleChange={handleChange}
+                  messages={res.getErrors()}
+                  cn={cn}
+                />
+                <Date
+                  handleChange={handleChange}
+                  messages={res.getErrors()}
+                  cn={cn}
+                />
+                <Service
+                  handleChange={handleChange}
+                  messages={res.getErrors()}
+                  cn={cn}
+                />
+                {/* <Submit disabled={!res.isValid()} /> */}
+                <Button
+                  // class={'create-invoice-btn'}
+                  onClick={handleSubmit}
+                  buttonText="generate invoice"
+                />
+              </Card>
+            </form>
+          }
+        />
+      </Routes>
     </Wrapper>
   );
 }
