@@ -104,47 +104,51 @@ const AuthForm = () => {
     event.preventDefault();
 
     const enteredEmail: string = emailInputRef.current!.value;
-    const enteredPassword = passwordInputRef.current!.value;
-    const reEnteredPassword = passwordReEnterInputRef.current!.value;
+    const enteredPassword: string = passwordInputRef.current!.value;
 
-    const passwordValidationMessage = passwordValidator(
-      enteredPassword,
-      reEnteredPassword,
-    );
-
-    if (passwordValidationMessage) {
-      // display modal with message
-      console.log(passwordValidationMessage);
-      return;
+    if (!isLogin) {
+      const reEnteredPassword = passwordReEnterInputRef.current!.value;
+      const passwordValidationMessage = passwordValidator(
+        enteredPassword,
+        reEnteredPassword,
+      );
+      if (passwordValidationMessage) {
+        // display modal with message
+        console.log(passwordValidationMessage);
+        return;
+      }
     }
 
-    const URL: string = process.env.REACT_APP_NEW_USER_URL!;
+    let url: string;
 
     if (isLogin) {
+      url = process.env.REACT_APP_EXISTING_USER_URL!;
     } else {
-      console.log('button clicked');
-      fetch(URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => {
-        if (res.ok) {
-          // handle success
-          console.log('success');
-        } else {
-          return res.json().then((data) => {
-            // show an error modal
-            console.log(data);
-          });
-        }
-      });
+      url = process.env.REACT_APP_NEW_USER_URL!;
     }
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      if (res.ok) {
+        // handle success
+        console.log('success');
+        console.log(res);
+      } else {
+        return res.json().then((data) => {
+          // show an error modal
+          console.log(data);
+        });
+      }
+    });
   };
 
   return (
