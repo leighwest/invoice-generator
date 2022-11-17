@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { createGlobalStyle, StyledComponent } from 'styled-components'; // applies to entire project
 import styled from 'styled-components';
@@ -17,6 +17,7 @@ import InvoiceDb from './Util/InvoiceDb';
 import { SuiteResult } from 'vest';
 
 import AuthForm from 'Components/Auth/AuthForm';
+import AuthContext from 'store/auth-context';
 
 const GlobalStyle = createGlobalStyle`
 label {
@@ -36,6 +37,12 @@ const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
 
 export default function App() {
   const [formstate, setFormstate] = useState<any>({});
+
+  const authCtx = useContext(AuthContext);
+
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  console.log(`isLoggedIn: ${isLoggedIn}`);
 
   const res: SuiteResult = formValidation.get();
 
@@ -97,32 +104,34 @@ export default function App() {
         <Route
           path="/create-invoice"
           element={
-            <form onSubmit={handleSubmit}>
-              <Card>
-                <GlobalStyle />
-                <Address
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                <Date
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                <Service
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                {/* <Submit disabled={!res.isValid()} /> */}
-                <Button
-                  // class={'create-invoice-btn'}
-                  onClick={handleSubmit}
-                  buttonText="generate invoice"
-                />
-              </Card>
-            </form>
+            isLoggedIn && (
+              <form onSubmit={handleSubmit}>
+                <Card>
+                  <GlobalStyle />
+                  <Address
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  <Date
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  <Service
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  {/* <Submit disabled={!res.isValid()} /> */}
+                  <Button
+                    // class={'create-invoice-btn'}
+                    onClick={handleSubmit}
+                    buttonText="generate invoice"
+                  />
+                </Card>
+              </form>
+            )
           }
         />
       </Routes>

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import AuthContext from 'store/auth-context';
 import styled from 'styled-components';
 
 const StyledSection = styled.section`
@@ -94,6 +95,8 @@ const AuthForm = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const passwordReEnterInputRef = useRef<HTMLInputElement>(null);
 
+  const authCtx = useContext(AuthContext);
+
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
@@ -137,18 +140,26 @@ const AuthForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((res) => {
-      if (res.ok) {
-        // handle success
-        console.log('success');
-        console.log(res);
-      } else {
-        return res.json().then((data) => {
-          // show an error modal
-          console.log(data);
-        });
-      }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          // handle success
+          console.log('success');
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            // show an error modal
+            console.log(data);
+          });
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        authCtx.login(data.idToken);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
