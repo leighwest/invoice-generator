@@ -1,4 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import AuthContext from 'store/auth-context';
 import styled from 'styled-components';
 
@@ -97,6 +99,8 @@ const AuthForm = () => {
 
   const authCtx = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
@@ -156,6 +160,7 @@ const AuthForm = () => {
       .then((data) => {
         console.log(data);
         authCtx.login(data.idToken);
+        navigate('/create-invoice');
       })
       .catch((err) => {
         alert(err.message);
