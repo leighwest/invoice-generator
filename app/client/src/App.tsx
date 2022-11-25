@@ -95,43 +95,53 @@ export default function App() {
               replace
               to="/login"
             />
-          }></Route>
+          }
+        />
         <Route
           index
           path="/login"
-          element={<AuthForm />}
+          element={!isLoggedIn && <AuthForm />}
         />
         <Route
           path="/create-invoice"
           element={
-            // isLoggedIn && (
-            <form onSubmit={handleSubmit}>
-              <Card>
-                <GlobalStyle />
-                <Address
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                <Date
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                <Service
-                  handleChange={handleChange}
-                  messages={res.getErrors()}
-                  cn={cn}
-                />
-                {/* <Submit disabled={!res.isValid()} /> */}
-                <Button
-                  // class={'create-invoice-btn'}
-                  onClick={handleSubmit}
-                  buttonText="generate invoice"
-                />
-              </Card>
-            </form>
-            // )
+            isLoggedIn && (
+              <form onSubmit={handleSubmit}>
+                <Card>
+                  <GlobalStyle />
+                  <Address
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  <Date
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  <Service
+                    handleChange={handleChange}
+                    messages={res.getErrors()}
+                    cn={cn}
+                  />
+                  {/* <Submit disabled={!res.isValid()} /> */}
+                  <Button
+                    // class={'create-invoice-btn'}
+                    onClick={handleSubmit}
+                    buttonText="generate invoice"
+                  />
+                </Card>
+              </form>
+            )
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Navigate
+              replace
+              to="/login"
+            />
           }
         />
       </Routes>
