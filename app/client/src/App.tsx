@@ -91,16 +91,32 @@ export default function App() {
         <Route
           path="/"
           element={
-            <Navigate
-              replace
-              to="/login"
-            />
+            !isLoggedIn ? (
+              <Navigate
+                replace
+                to="/login"
+              />
+            ) : (
+              <Navigate
+                replace
+                to="/create-invoice"
+              />
+            )
           }
         />
         <Route
           index
           path="/login"
-          element={!isLoggedIn && <AuthForm />}
+          element={
+            !isLoggedIn ? (
+              <AuthForm />
+            ) : (
+              <Navigate
+                replace
+                to="/create-invoice"
+              />
+            )
+          }
         />
         <Route
           path="/create-invoice"
