@@ -36,7 +36,7 @@ const TextInput = ({
   };
 
   return (
-    <StyledTextInputWrapper>
+    <StyledTextInputWrapper className={classes[className]}>
       <label htmlFor={name}>
         <strong>{label.replace(/-/g, ' ')}</strong>
         {messages.length ? (
