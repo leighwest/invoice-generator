@@ -6,13 +6,13 @@ This web application allows users to create styled .pdf invoices by submitting t
 
 ### Client (todo)
 
-The application uses the Google Firebase Auth REST API for user sign-up and login authentication. You will need a Firebase Realtime Database to store and access login credentials.
+The application uses the Google Firebase Auth REST API for user sign-up and login authentication (docs: https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password). You will need a Firebase Realtime Database to store and access login credentials.
 The application accesses these credentials using the project's API key which can be accessed by clicking the settings cog icon next to Project Overview in the Firebase Console, and then clicking Project Settings.
 In your React application, create a .env file in the root directory of the *client* and create two variables:
-	REACT_APP_EXISTING_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]'
-	REACT_APP_NEW_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]'
+	`REACT_APP_EXISTING_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]`
+	`REACT_APP_NEW_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]`
 	
-	replace [API_KEY] with the API key obtained from the Project Settings
+Replace [API_KEY] with the API key obtained from the Project Settings
 
 ### Server
 
