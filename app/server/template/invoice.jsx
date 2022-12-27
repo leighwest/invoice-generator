@@ -32,10 +32,4 @@ const invoice = (invoiceData) => {
   );
 };
 
-// module.exports = React.createClass({
-//     render: function () {
-//         return React.createElement('h1', null, 'Hello World!');
-//     }
-// });
-
 module.exports = invoice;

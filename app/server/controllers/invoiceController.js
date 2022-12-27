@@ -8,10 +8,6 @@ exports.createInvoice = async (req, res) => {
     service: req.body.service,
   };
 
-  console.log(
-    `In invoiceController street address is: ${invoiceData.address.streetAddress}`
-  );
-
   const invoice = await invoiceGenerator(invoiceData);
   res.send(invoice);
 };
