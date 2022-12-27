@@ -40,12 +40,16 @@ Accept application/json
 In the body of your JSON request, submit the following data:
 ```
 {
-	"title": "test title",
-	"content": "some content"
+	"address": {
+		"recipient": "Mr Joe Smith",
+		"streetAddress": "123 Example Ave",
+		"suburb": "Exampleton",
+		"state": "VIC"
+	}
 }
 ```
 
-Send the POST request to: http://localhost:49160/api/invoice
+Send the POST request to: http://localhost:49160/invoice
 
 ### Expected response
 
