@@ -1,5 +1,5 @@
 import { User } from "../models/user";
-import { Request, RequestHandler, Response } from 'express';
+import { RequestHandler } from 'express';
 
 
 // const uuid = require('uuid/v4');
@@ -27,7 +27,13 @@ export const signup: RequestHandler = async (req, res) => {
     password
   }
 
-  // validate user
+  // TODO: validate user (should this be in a service?)
+
+  const userExists = DUMMY_USERS.find(u => u.email === email);
+
+  if (userExists) {
+    throw new HttpError("Could not create user, email already exists", 422);
+  }
 
   DUMMY_USERS.push(createdUser);
 
@@ -41,7 +47,6 @@ export const login: RequestHandler = async (req, res) => {
 
   const identifiedUser = DUMMY_USERS.find(u => u.email === email);
   if (!identifiedUser || identifiedUser.password !== password) {
-    // why is this any type?
     throw new HttpError("Credentials invalid, could not identify user", 401);
   }
 
