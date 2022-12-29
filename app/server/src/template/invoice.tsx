@@ -1,7 +1,7 @@
-var React = require("react");
-const template = require("../template/invoice.jsx");
+import React from "react";
+// const template = require("../template/invoice.jsx");
 
-const invoice = (invoiceData) => {
+export const invoiceTemplate = (invoiceData: { address: { recipient: string; streetAddress: string; suburb: string; state: string; postcode: string; }; }) => {
   const titleStyle = {
     fontSize: "10rem",
     lineHeight: "1.6",
@@ -11,10 +11,10 @@ const invoice = (invoiceData) => {
   const { recipient, streetAddress, suburb, state, postcode } =
     invoiceData.address;
 
-  console.log(`recipient is: ${recipient}`);
-  console.log(`street address is: ${streetAddress}`);
-  console.log("before state...");
-  console.log(`state is: ${state}`);
+  // console.log(`recipient is: ${recipient}`);
+  // console.log(`street address is: ${streetAddress}`);
+  // console.log("before state...");
+  // console.log(`state is: ${state}`);
 
   return (
     <div>
@@ -31,5 +31,3 @@ const invoice = (invoiceData) => {
     </div>
   );
 };
-
-module.exports = invoice;
