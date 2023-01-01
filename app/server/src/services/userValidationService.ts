@@ -27,9 +27,8 @@ export const validateUser = (user: User) => {
     });
   }
 
-  const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i; // regex for email
+  const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i; // regex for valid email format
   if (!expression.test(email)) {
-    console.log('email validation failed');
     errorMessages.push({
       message: 'Email is invalid',
     });
