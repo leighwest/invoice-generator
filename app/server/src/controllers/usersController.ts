@@ -16,7 +16,7 @@ const DUMMY_USERS: User[] = [
 ];
 
 // does this need to be async?
-export const signup: RequestHandler = async (req, res) => {
+export const signup: RequestHandler = async (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
 
   // should this be a class instead?
@@ -32,12 +32,15 @@ export const signup: RequestHandler = async (req, res) => {
 
   if (validationErrors.length !== 0) {
     res.status(422).json(validationErrors);
+    return;
   }
 
   const userExists = DUMMY_USERS.find((u) => u.email === email);
 
   if (userExists) {
-    throw new HttpError('Could not create user, email already exists', 422);
+    return next(
+      new HttpError('Could not create user, email already exists', 422),
+    );
   }
 
   DUMMY_USERS.push(createdUser);
@@ -48,6 +51,8 @@ export const signup: RequestHandler = async (req, res) => {
 export const login: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
 
+  // IMPORTANT: don't throw errors in your controller layer. You should throw errors FROM your SERVICE
+  // layer which is then HANDLED by your CONTROLLER
   const identifiedUser = DUMMY_USERS.find((u) => u.email === email);
   if (!identifiedUser || identifiedUser.password !== password) {
     throw new HttpError('Credentials invalid, could not identify user', 401);

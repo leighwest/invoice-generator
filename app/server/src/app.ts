@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 
 import invoiceRoutes from './routes/invoice';
-import usersRoutes from './routes/users'
+import usersRoutes from './routes/users';
 
 const app = express();
 
@@ -14,13 +14,13 @@ const app = express();
 app.use(bodyParser.json()); // application/json
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow_Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow_Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
 });
 
-app.use('/', invoiceRoutes)
-app.use('/users', usersRoutes)
+app.use('/', invoiceRoutes);
+app.use('/users', usersRoutes);
 
-app.listen(8080);
+app.listen(5000);

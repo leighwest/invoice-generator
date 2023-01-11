@@ -1,17 +1,11 @@
-// let ReactDOMServer = require("react-dom/server");
-import ReactDOMServer from "react-dom/server"
-import React from "react";
+import ReactDOMServer from 'react-dom/server';
+import React from 'react';
 
-import {invoiceTemplate} from "../template/invoice";
-
-
+import { invoiceTemplate } from '../template/invoice';
 
 // require("babel-register")({
 //   presets: ["react"],
 // });
-
-
-
 
 // let ReactDOMServer = require("react-dom/server");
 
@@ -22,7 +16,7 @@ export const templateService = (invoiceData: any) => {
   // console.log(invoiceData.address.suburb);
 
   const html = ReactDOMServer.renderToString(
-    React.createElement(invoiceTemplate, invoiceData)
+    React.createElement(invoiceTemplate, invoiceData),
   );
 
   return html;
