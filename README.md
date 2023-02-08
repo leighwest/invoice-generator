@@ -25,7 +25,7 @@ docker build . -t <your username>/invoice-generator-server
 
 Run the Docker image:
 ```    
-docker run -p 49160:8080 -d <your username>/invoice-generator-server
+docker run -p 5000:5000 -d <your username>/invoice-generator-server
 ```
 
 
