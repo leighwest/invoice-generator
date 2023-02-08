@@ -11,5 +11,6 @@ export const createInvoice = async (req: Request, res: Response) => {
   };
 
   const invoice = await invoiceGenerator(invoiceData);
+  res.contentType("application/pdf");
   res.status(201).send(invoice);
 };
