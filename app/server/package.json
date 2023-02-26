@@ -12,7 +12,7 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "test": "npx jest",
+    "test": "npx tsc && npx jest",
     "start": "nodemon app.js"
   },
   "author": "Leigh West",
