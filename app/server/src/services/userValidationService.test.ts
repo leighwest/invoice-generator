@@ -1,9 +1,11 @@
-import { validateUser } from './userValidationService';
-import { User } from '../models/user';
+import {
+  validateSignUpUser,
+  UserValidationError,
+} from './userValidationService';
+import { IUser } from '../models/user';
 
 describe('New user validator tests', () => {
-  const user: User = {
-    id: 'u1',
+  const user: IUser = {
     firstName: 'Peter',
     lastName: 'Griffin',
     email: 'p.griffin@example.com',
@@ -11,18 +13,22 @@ describe('New user validator tests', () => {
   };
 
   test('Returns a "first name invalid" error message if first name is empty', async () => {
-    const userBlankFirstName: User = { ...user, firstName: '' };
+    const userBlankFirstName: IUser = { ...user, firstName: '' };
 
-    const validationResult = validateUser(userBlankFirstName);
+    const validationResult: UserValidationError[] = await validateSignUpUser(
+      userBlankFirstName,
+    );
 
     expect(validationResult.length).toEqual(1);
     expect(validationResult[0].message).toBe('First name cannot be empty');
   });
 
   test('Returns a "last name invalid" error message if first name is empty', async () => {
-    const userBlankLastName: User = { ...user, lastName: '' };
+    const userBlankLastName: IUser = { ...user, lastName: '' };
 
-    const validationResult = validateUser(userBlankLastName);
+    const validationResult: UserValidationError[] = await validateSignUpUser(
+      userBlankLastName,
+    );
 
     expect(validationResult.length).toEqual(1);
     expect(validationResult[0].message).toBe('Last name cannot be empty');

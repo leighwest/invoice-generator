@@ -1,15 +1,13 @@
 import express, { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import invoiceRoutes from './routes/invoice';
 import usersRoutes from './routes/users';
 
 const app = express();
-
-// require('@babel/register')({
-//     ignore: [/(node_modules)/],
-//     presets: ['@babel/preset-env', '@babel/preset-react']
-// });
 
 app.use(bodyParser.json()); // application/json
 
@@ -23,4 +21,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/', invoiceRoutes);
 app.use('/users', usersRoutes);
 
-app.listen(5000);
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
