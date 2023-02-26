@@ -2,7 +2,10 @@ import { IUser } from '../models/user';
 import { RequestHandler } from 'express';
 
 import { HttpError } from '../models/httpError';
-import { validateSignUpUser } from '../services/userValidationService';
+import {
+  validateSignUpUser,
+  validateLoginUser,
+} from '../services/userValidationService';
 import User from '../models/user';
 
 import { Request, Response, NextFunction } from 'express';
@@ -44,7 +47,7 @@ export const signup = async (
 };
 
 export const login: RequestHandler = async (req, res) => {
-  const validationErrors = await validateSignUpUser(req.body);
+  const validationErrors = await validateLoginUser(req.body);
 
   if (validationErrors.length !== 0) {
     res.status(401).json(validationErrors);
