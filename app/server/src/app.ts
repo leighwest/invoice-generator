@@ -22,6 +22,7 @@ app.use('/', invoiceRoutes);
 app.use('/users', usersRoutes);
 
 mongoose
+  .set('strictQuery', false)
   .connect(process.env.MONGO_URL)
   .then(() => {
     app.listen(5000);
