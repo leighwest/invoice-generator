@@ -1,7 +1,5 @@
 import { IUser } from '../models/user';
 import { RequestHandler } from 'express';
-
-import { HttpError } from '../models/httpError';
 import {
   validateSignUpUser,
   validateLoginUser,
@@ -24,8 +22,6 @@ export const signup = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { firstName, lastName, email, password } = req.body;
-
   const validationErrors = await validateSignUpUser(req.body);
 
   if (validationErrors.length !== 0) {
@@ -33,11 +29,21 @@ export const signup = async (
     return;
   }
 
+  // From here:
+  // Should be a new service which creates the user and saves it.
+  // Call it userService that has a bunch of user functions
+  // Keep your controller lean (request and responses only)
+
   const createdUser = new User(req.body);
 
   try {
     await createdUser.save();
   } catch (err) {
+    if (err.code === 11000) {
+      res.status(422).json({
+        message: 'Could not create user, email already exists.',
+      });
+    }
     res.status(422).json({
       message: 'Sign up failed, please try again.',
     });

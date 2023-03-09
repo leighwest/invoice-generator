@@ -8,20 +8,19 @@ export const validateSignUpUser = async (user: IUser) => {
   const { firstName, lastName, email, password } = user;
   const errorMessages: UserValidationError[] = [];
 
-  if (firstName.length === 0 || firstName === null) {
+  if (!firstName || firstName.length === 0 || firstName === null) {
     errorMessages.push({
       message: 'First name cannot be empty',
     });
   }
 
-  console.log('validate user B');
-  if (lastName.length === 0 || lastName === null) {
+  if (!lastName || lastName.length === 0 || lastName === null) {
     errorMessages.push({
       message: 'Last name cannot be empty',
     });
   }
 
-  if (email.length === 0 || email === null) {
+  if (!email || email.length === 0 || email === null) {
     errorMessages.push({
       message: 'Email cannot be empty',
     });
@@ -34,14 +33,14 @@ export const validateSignUpUser = async (user: IUser) => {
     });
   }
 
-  // const existingUser = await User.findOne({ email });
-  // if (existingUser) {
-  //   errorMessages.push({
-  //     message: 'Could not create user, email already exists',
-  //   });
-  // }
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    errorMessages.push({
+      message: 'Could not create user, email already exists',
+    });
+  }
 
-  if (password.length === 0 || password === null) {
+  if (!password || password.length === 0 || password === null) {
     errorMessages.push({
       message: 'Password cannot be empty',
     });
@@ -57,7 +56,7 @@ export const validateLoginUser = async (user: {
   const { email, password } = user;
   const errorMessages: UserValidationError[] = [];
 
-  if (email.length === 0 || email === null) {
+  if (!email || email.length === 0 || email === null) {
     errorMessages.push({
       message: 'Email cannot be empty',
     });
@@ -78,7 +77,7 @@ export const validateLoginUser = async (user: {
     });
   }
 
-  if (password.length === 0 || password === null) {
+  if (!password || password.length === 0 || password === null) {
     errorMessages.push({
       message: 'Password cannot be empty',
     });
