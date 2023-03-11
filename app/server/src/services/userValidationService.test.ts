@@ -3,6 +3,7 @@ import {
   UserValidationError,
 } from './userValidationService';
 import { IUser } from '../models/user';
+import User from '../models/user';
 
 describe('New user validator tests', () => {
   const user: IUser = {
@@ -11,6 +12,8 @@ describe('New user validator tests', () => {
     email: 'p.griffin@example.com',
     password: 'password123',
   };
+
+  User.findOne = jest.fn().mockReturnValue(null);
 
   test('Returns a "first name invalid" error message if first name is empty', async () => {
     const userBlankFirstName: IUser = { ...user, firstName: '' };
@@ -69,5 +72,21 @@ describe('New user validator tests', () => {
 
     expect(validationResult.length).toEqual(1);
     expect(validationResult[0].message).toBe('Email is invalid');
+  });
+
+  test('Duplicate email fails email validation', async () => {
+    User.findOne = jest.fn().mockResolvedValue({
+      firstName: 'Existing',
+      lastName: 'User',
+      email: 'p.griffin1@example.com',
+      password: 'password123',
+    });
+
+    const validationResult = await validateSignUpUser(user);
+
+    expect(validationResult.length).toEqual(1);
+    expect(validationResult[0].message).toBe(
+      'Could not create user, email already exists',
+    );
   });
 });
