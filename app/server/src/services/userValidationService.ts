@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 import User, { IUser } from '../models/user';
 
 export class UserValidationError extends Error {
@@ -42,8 +44,8 @@ export const validateSignUpUser = async (user: IUser) => {
 };
 
 export const validateLoginUser = async (user: {
-  email: any;
-  password: any;
+  email: string;
+  password: string;
 }) => {
   const { email, password } = user;
   const errorMessages: UserValidationError[] = [];
@@ -59,7 +61,7 @@ export const validateLoginUser = async (user: {
 
   const existingUser = await User.findOne({ email });
 
-  if (!existingUser || existingUser.password !== password) {
+  if (!existingUser) {
     errorMessages.push(
       new UserValidationError('Invalid credentials, please try again.'),
     );
@@ -67,6 +69,17 @@ export const validateLoginUser = async (user: {
 
   if (!password || password.length === 0 || password === null) {
     errorMessages.push(new UserValidationError('Password cannot be empty'));
+  }
+
+  let isValidPassword = false;
+  try {
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
+  } catch (err) {
+    throw new UserValidationError('Password invalid, please try again.');
+  }
+
+  if (!isValidPassword) {
+    throw new UserValidationError('Password invalid, please try again.');
   }
 
   return errorMessages;

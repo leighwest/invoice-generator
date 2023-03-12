@@ -5,7 +5,7 @@ import {
   validateLoginUser,
   UserValidationError,
 } from '../services/userValidationService';
-import { saveUser } from '../services/userService';
+import { createUserSession, saveUser } from '../services/userService';
 
 import { Request, Response, NextFunction } from 'express';
 
@@ -22,14 +22,13 @@ export const signup = async (req: Request<{}, {}, IUser>, res: Response) => {
   const validationErrors = await validateSignUpUser(req.body);
 
   if (validationErrors.length !== 0) {
-    res.status(422).json(validationErrors);
-    return;
+    return res.status(422).json(validationErrors);
   }
 
   try {
     // TODO: what should I return if it's successful?
-    const someResponse = await saveUser(req.body);
-    return res.status(201).json(someResponse);
+    const createdUser = await saveUser(req.body);
+    return res.status(201).json(createdUser);
   } catch (err) {
     // TODO: why is this an empty body? err.message works, but if I return err I receive
     // an empty object in Insomnia. Should I be returning .json({message: err.message})
@@ -43,9 +42,16 @@ export const login: RequestHandler = async (req, res) => {
   const validationErrors = await validateLoginUser(req.body);
 
   if (validationErrors.length !== 0) {
-    res.status(401).json(validationErrors);
-    return;
+    return res.status(401).json(validationErrors);
   }
 
-  res.json({ message: 'Logged in!' });
+  const user = await createUserSession(req.body.email);
+
+  if (user.userId) {
+    return res.status(200).json(user);
+  } else {
+    return res.status(422).json({
+      message: 'User login unsuccessful, please try again.',
+    });
+  }
 };
