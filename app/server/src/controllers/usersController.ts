@@ -1,11 +1,10 @@
-import { IUser } from '../models/user';
+import { IUser } from 'models/user';
 import { RequestHandler } from 'express';
 import {
   validateSignUpUser,
   validateLoginUser,
-  UserValidationError,
-} from '../services/userValidationService';
-import { createUserSession, saveUser } from '../services/userService';
+} from 'services/userValidationService';
+import { createUserSession, saveUser } from 'services/userService';
 
 import { Request, Response, NextFunction } from 'express';
 

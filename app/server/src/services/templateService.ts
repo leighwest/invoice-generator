@@ -1,7 +1,7 @@
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 
-import { invoiceTemplate } from '../template/invoice';
+import { invoiceTemplate } from 'template/invoice';
 
 // require("babel-register")({
 //   presets: ["react"],

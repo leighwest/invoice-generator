@@ -57,7 +57,7 @@ export const createUserSession = async (email: string) => {
   let token;
   try {
     token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
+      { userId: existingUser!.id, email: existingUser!.email },
       'secret_$$_token',
       { expiresIn: '1h' },
     );
@@ -65,5 +65,5 @@ export const createUserSession = async (email: string) => {
     throw Error('Could not create user, please try again');
   }
 
-  return { userId: existingUser.id, email: existingUser.email, token };
+  return { userId: existingUser!.id, email: existingUser!.email, token };
 };
