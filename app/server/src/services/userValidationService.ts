@@ -76,12 +76,16 @@ export const validateLoginUser = async (user: {
     try {
       isValidPassword = await bcrypt.compare(password, existingUser.password);
     } catch (err) {
-      throw new UserValidationError('Password invalid, please try again.');
+      errorMessages.push(
+        new UserValidationError('Password invalid, please try again.'),
+      );
     }
   }
 
   if (!isValidPassword) {
-    throw new UserValidationError('Password invalid, please try again.');
+    errorMessages.push(
+      new UserValidationError('Password invalid, please try again.'),
+    );
   }
 
   return errorMessages;
