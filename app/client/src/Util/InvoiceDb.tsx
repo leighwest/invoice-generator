@@ -2,12 +2,16 @@ import { Invoice } from 'Models/InvoiceModel';
 import { BASEURL } from '../constants';
 
 const InvoiceDb = {
-  async createInvoice(invoice: Invoice): Promise<string | unknown> {
+  async createInvoice(
+    invoice: Invoice,
+    token: String,
+  ): Promise<string | unknown> {
     let headers: Headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('Origin', `${BASEURL}3000`);
+    headers.append('Authorization', `Bearer ${token}`);
 
     try {
       const response: Response = await fetch(`${BASEURL}8080/invoice`, {

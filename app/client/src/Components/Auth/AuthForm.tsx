@@ -158,10 +158,10 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        const expirationTime = new Date(
-          new Date().getTime() + +data.expiresIn * 1000,
-        );
-        authCtx.login(data.idToken, expirationTime.toISOString());
+        // const expirationTime = new Date(
+        //   new Date().getTime() + +data.expiresIn * 1000,
+        // );
+        authCtx.login(data.userId, data.token);
         navigate('/create-invoice');
       })
       .catch((err) => {

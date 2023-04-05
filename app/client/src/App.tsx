@@ -78,7 +78,7 @@ export default function App() {
       ],
     };
 
-    InvoiceDb.createInvoice(invoice).then((response: any) => {
+    InvoiceDb.createInvoice(invoice, authCtx.token!!).then((response: any) => {
       if (response && response!.message) {
         console.error(`createInvoice returned an error: ${response.message}`);
       }

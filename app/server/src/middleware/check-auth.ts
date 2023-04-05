@@ -16,10 +16,14 @@ export interface AuthRequest extends Request {
 }
 
 export const checkAuth = (req: AuthRequest, next: NextFunction) => {
+  if (req.method === 'OPTIONS') {
+    return next();
+  }
+
   try {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
-      const error = new Error('Authentication failed!'); // if split fails
+      const error = new Error('Authentication failed, missing token'); // if split fails
       return next(error);
     }
     const decodedToken = jwt.verify(token, 'secret_$$_token') as JwtPayload;
