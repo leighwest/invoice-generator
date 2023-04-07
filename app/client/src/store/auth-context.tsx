@@ -75,19 +75,28 @@ export const AuthContextProvider = (props: Props) => {
 
   const logoutHandler = useCallback(() => {
     setToken(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationTime');
+    localStorage.removeItem('userData');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('expirationTime');
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
   }, []);
 
-  const loginHandler = (token: string, expirationTime: string) => {
+  const loginHandler = (
+    token: string,
+    userId: string,
+    // expirationTime: string,
+  ) => {
     setToken(token);
-    console.log(`token is: ${token}`);
-    localStorage.setItem('token', token);
-    localStorage.setItem('expirationTime', expirationTime);
+    setUserId(userId);
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({ userId: userId, token: token }),
+    );
+    // localStorage.setItem('token', token);
+    // localStorage.setItem('expirationTime', expirationTime);
 
     // const remainingTime = calculateRemainingTime(expirationTime);
     const remainingTime = 10;
