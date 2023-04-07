@@ -31,7 +31,7 @@ const OptionInput = ({
   };
 
   return (
-    <div className={classes[className]}>
+    <div className={classes[className!]}>
       <label htmlFor={name}>
         <strong>{label}</strong>
         {messages.length ? (

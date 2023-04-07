@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import TextInput from '../Input/TextInput';
-import OptionInput from '../Input/OptionInput';
+import TextInput from 'Components/Input/TextInput';
+import OptionInput from 'Components/Input/OptionInput';
+import { InputProps } from './formSectionTypes';
 
 const BottomRowWrapper = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const BottomRowWrapper = styled.div`
   border-bottom: 2px solid var(--color-purple);
 `;
 
-const Address = (props) => {
+const Address = (props: InputProps) => {
   return (
     <>
       <h2>Address</h2>

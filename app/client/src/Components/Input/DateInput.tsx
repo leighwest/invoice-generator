@@ -42,7 +42,7 @@ const DateInput = ({
   const [date, setDate] = useState<null | Date>(null);
 
   return (
-    <StyledDateInputWrapper className={classes[className]}>
+    <StyledDateInputWrapper className={classes[className!]}>
       <label htmlFor={name}>
         <strong>{label}</strong>
         {messages.length ? (
