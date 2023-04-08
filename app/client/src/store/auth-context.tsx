@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import jwtDecode from 'jwt-decode';
 
 let logoutTimer: NodeJS.Timeout;
 
@@ -6,11 +7,17 @@ type AuthContextType = {
   isLoggedIn: boolean | undefined;
   userId: string | null | undefined;
   token: string | null | undefined;
-  login: (userId: string, token: string) => void;
+  login: (token: string) => void;
   logout: () => void;
 };
 
-// This is the preferred method
+type AuthToken = {
+  userId: string;
+  email: string;
+  iat: number;
+  exp: number;
+};
+
 type Props = {
   children: JSX.Element | JSX.Element[];
 };
@@ -27,88 +34,57 @@ const AuthContext = React.createContext<AuthContextType>({
   logout: () => {},
 });
 
-// const calculateRemainingTime = (expirationTime: string): number => {
-//   const currentTime = new Date().getTime();
-//   const adjExpirationTime = new Date(expirationTime).getTime();
+const retrieveStoredToken = (): string | null => {
+  const storedUserData = JSON.parse(localStorage.getItem('userData')!!);
 
-//   const remainingDuration: number = adjExpirationTime - currentTime;
+  if (storedUserData) {
+    const decodedToken: AuthToken = jwtDecode(storedUserData.token);
 
-//   return remainingDuration;
-// };
+    const storedExpirationDate = decodedToken.exp;
 
-// const retrieveStoredToken = () => {
-//   const storedToken = localStorage.getItem('token');
-//   const storedExpirationDate = localStorage.getItem('expirationTime');
-
-//   const remainingTime = calculateRemainingTime(storedExpirationDate!);
-
-//   if (remainingTime <= 60000) {
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('expirationTime');
-//     return null;
-//   }
-
-//   return {
-//     token: storedToken,
-//     duration: remainingTime,
-//   };
-// };
+    if (Date.now() - storedExpirationDate <= 60000) {
+      localStorage.removeItem('userData');
+      return null;
+    }
+    return storedUserData.token;
+  }
+  return null;
+};
 
 export const AuthContextProvider = (props: Props) => {
-  // const tokenData = retrieveStoredToken();
-  // const tokenData = { token: '1234', duration: 60 };
+  const storedToken = retrieveStoredToken();
   let initialToken = null;
   let initialUserId = null;
-  // if (tokenData) {
-  //   initialToken = tokenData.token;
-  // }
+  if (storedToken) {
+    initialToken = storedToken;
+  }
   const [token, setToken] = useState<string | null | undefined>(initialToken);
 
   const [userId, setUserId] = useState<string | null | undefined>(
     initialUserId,
   );
 
-  console.log(
-    `token evaluates to ${token} and !!token evaluates to ${!!token}`,
-  );
   const userIsLoggedIn = !!token;
 
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem('userData');
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('expirationTime');
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
   }, []);
 
-  const loginHandler = (
-    token: string,
-    userId: string,
-    // expirationTime: string,
-  ) => {
+  const loginHandler = (token: string) => {
+    const decodedToken: AuthToken = jwtDecode(token);
+
     setToken(token);
-    setUserId(userId);
+    setUserId(decodedToken.userId);
     localStorage.setItem(
       'userData',
       JSON.stringify({ userId: userId, token: token }),
     );
-    // localStorage.setItem('token', token);
-    // localStorage.setItem('expirationTime', expirationTime);
-
-    // const remainingTime = calculateRemainingTime(expirationTime);
-    const remainingTime = 10;
-
-    // logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
-
-  // useEffect(() => {
-  //   if (tokenData) {
-  //     logoutTimer = setTimeout(logoutHandler, tokenData.duration);
-  //   }
-  // }, [tokenData, logoutHandler]);
 
   const contextValue = {
     isLoggedIn: userIsLoggedIn,

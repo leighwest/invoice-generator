@@ -161,7 +161,7 @@ const AuthForm = () => {
         // const expirationTime = new Date(
         //   new Date().getTime() + +data.expiresIn * 1000,
         // );
-        authCtx.login(data.userId, data.token);
+        authCtx.login(data.token);
         navigate('/create-invoice');
       })
       .catch((err) => {
