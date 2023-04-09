@@ -42,7 +42,8 @@ const retrieveStoredToken = (): string | null => {
 
     const storedExpirationDate = decodedToken.exp;
 
-    if (Date.now() - storedExpirationDate <= 60000) {
+    // log the user out if there is less than 60 seconds left on token expiry
+    if (storedExpirationDate - Math.floor(Date.now()) / 1000 <= 60) {
       localStorage.removeItem('userData');
       return null;
     }

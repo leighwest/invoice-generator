@@ -58,7 +58,7 @@ export default function App() {
     setFormstate(nextState);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const invoice: Invoice = {
       address: {
@@ -78,11 +78,16 @@ export default function App() {
       ],
     };
 
-    InvoiceDb.createInvoice(invoice, authCtx.token!!).then((response: any) => {
-      if (response && response!.message) {
-        console.error(`createInvoice returned an error: ${response.message}`);
-      }
-    });
+    await InvoiceDb.createInvoice(invoice, authCtx.token!!).then(
+      (response: any) => {
+        console.log(response.status);
+        if (response && response.error) {
+          console.error(
+            `createInvoice returned an error: ${response.error.message}`,
+          );
+        }
+      },
+    );
   };
 
   return (
@@ -121,7 +126,7 @@ export default function App() {
         <Route
           path="/create-invoice"
           element={
-            isLoggedIn && (
+            isLoggedIn ? (
               <form onSubmit={handleSubmit}>
                 <Card>
                   <GlobalStyle />
@@ -148,6 +153,11 @@ export default function App() {
                   />
                 </Card>
               </form>
+            ) : (
+              <Navigate
+                replace
+                to="/"
+              />
             )
           }
         />
