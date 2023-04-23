@@ -1,8 +1,8 @@
 FROM node:lts
 
-WORKDIR /usr/src/app
+WORKDIR /app/
 
-COPY package*.json ./
+COPY package*.json /app/
 
 RUN npm install
 
@@ -17,11 +17,13 @@ RUN apt-get update \
     && groupadd -r pptruser && useradd -rm -g pptruser -G audio,video pptruser
 
 # Bundle app source
-COPY . .
+COPY . /app/
 
 RUN npm i puppeteer \
     && (node -e "require('child_process').execSync(require('puppeteer').executablePath() + ' --credits', {stdio: 'inherit'})" > THIRD_PARTY_NOTICES)
 
-EXPOSE 5000
+ENV PORT 5000
+
+EXPOSE $PORT
 
 CMD ["npm", "run", "start"]
