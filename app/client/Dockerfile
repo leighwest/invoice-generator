@@ -1,11 +1,11 @@
 FROM node:lts
 
-WORKDIR "/client"
+WORKDIR "/app"
 
-COPY package.json ./
-
-COPY . .
+COPY package.json .
 
 RUN npm install
 
-CMD ["npm", "run", "start"]
+COPY . .
+
+CMD ["npm", "start"]
