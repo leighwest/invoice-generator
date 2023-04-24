@@ -7,7 +7,7 @@ const InvoiceDb = {
 
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/pdf');
-    headers.append('Origin', `${BASEURL}3000`);
+    headers.append('Origin', `${BASEURL}${process.env.PORT}`);
     headers.append('Authorization', `Bearer ${token}`);
 
     try {
