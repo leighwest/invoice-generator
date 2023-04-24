@@ -26,4 +26,4 @@ ENV PORT 5000
 
 EXPOSE $PORT
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
