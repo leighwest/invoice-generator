@@ -4,7 +4,21 @@ This web application allows users to create styled .pdf invoices by submitting t
 
 ## Local Development Setup
 
-### Client (todo)
+### MongoDB Atlas
+
+(TODO: write steps for creating a DB, whitelisting IP addresses etc.)
+
+Create a `.env` file in the `server` root directory
+
+In the Mongodb Atlas web application, under Deployment > Database > Click Connect > Under Connect to your application > Click Drivers
+
+Select Node.js as the driver and 2.2.12 or later as the version.
+
+Copy the connection string, replacing <password> with the user's password.
+
+Store this connection string as the variable `MONGO_URL` in your `.env` file.
+
+### Client 
 
 Clone the repository and cd into the app/client directory.
 
