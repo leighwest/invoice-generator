@@ -1,5 +1,4 @@
 import React from 'react';
-// const template = require("../template/invoice.jsx");
 
 export const invoiceTemplate = (invoiceData: {
   address: {

@@ -129,9 +129,9 @@ const AuthForm = () => {
     let url: string;
 
     if (isLogin) {
-      url = process.env.REACT_APP_EXISTING_USER_URL!;
+      url = process.env.REACT_APP_EXISTING_USER_URL || "";
     } else {
-      url = process.env.REACT_APP_NEW_USER_URL!;
+      url = process.env.REACT_APP_NEW_USER_URL || "";
     }
 
     fetch(url, {
@@ -147,20 +147,13 @@ const AuthForm = () => {
     })
       .then((res) => {
         if (res.ok) {
-          // handle success
-          console.log('success');
           return res.json();
         } else {
-          return res.json().then((data) => {
-            // show an error modal
-            console.log(data);
-          });
+          // TODO: Handle failure better
+          throw new Error("Request failed")
         }
       })
       .then((data) => {
-        // const expirationTime = new Date(
-        //   new Date().getTime() + +data.expiresIn * 1000,
-        // );
         authCtx.login(data.token);
         navigate('/create-invoice');
       })
@@ -204,8 +197,6 @@ const AuthForm = () => {
         )}
         <ActionDiv>
           <button
-            // onClick={submitHandler}
-
             type="submit">
             {isLogin ? 'Login' : 'Create Account'}
           </button>
