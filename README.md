@@ -18,9 +18,19 @@ Copy the connection string, replacing <password> with the user's password.
 
 Store this connection string as the variable `MONGO_URL` in your `.env` file.
 
-### Client 
+### Client
 
 Clone the repository and cd into the app/client directory.
+
+Create a `.env` file in the `client` root directory
+
+Add the following to this file:
+
+```
+REACT_APP_NEW_USER_URL=http://localhost:5000/users/signup
+
+REACT_APP_EXISTING_USER_URL=http://localhost:5000/users/login
+```
 
 Build the Docker image:
 
@@ -68,23 +78,22 @@ In the body of your JSON request, submit the following data:
 		"streetAddress": "123 Example Ave",
 		"suburb": "Exampleton",
 		"state": "VIC"
-	}
+	},
+	"dateIssued": "05/06/2023",
+	"dateDue": "12/06/2023",
+	"service": [
+		{
+			"description": "Some service",
+			"cost": "65"
+		}
+	]
 }
 ```
 
-Send the POST request to: http://localhost:49160/invoice
+Send the POST request to: http://localhost:5000/invoice
 
 ### Expected response
 
 201 Created
 
-```
-{
-	"message": "Invoice created successfully!",
-	"post": {
-		"id": "2022-06-14T08:45:32.273Z",
-		"title": "test title",
-		"content": "some content"
-	}
-}
-```
+The invoice will be returned as a .pdf file
