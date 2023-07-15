@@ -80,7 +80,6 @@ export default function App() {
 
     await InvoiceDb.createInvoice(invoice, authCtx.token!!).then(
       (response: any) => {
-        console.log(response.status);
         if (response && response.error) {
           console.error(
             `createInvoice returned an error: ${response.error.message}`,
