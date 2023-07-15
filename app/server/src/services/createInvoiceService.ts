@@ -17,7 +17,11 @@ export const invoiceGenerator = async (invoiceData: any) => {
   );
   const styleTags = sheet.getStyleTags();
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox'],
+  });
+
   const page = await browser.newPage();
 
   // Set the page content to the generated HTML and add the extracted CSS styles

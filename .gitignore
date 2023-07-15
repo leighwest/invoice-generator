@@ -132,3 +132,4 @@ dist
 # Misc files
 *.pdf
 .Dockerfile.swp
+invoice.png

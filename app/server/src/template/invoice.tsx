@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { readFileSync } from 'fs';
 
 const Wrapper = styled.div`
   padding: 40px;
@@ -103,6 +104,10 @@ const FreeTextSection = styled.div`
   margin-top: 50px;
 `;
 
+const logoPath = 'src/public/images/logo.png';
+const logoBase64 = readFileSync(logoPath).toString('base64');
+const logoSrc = `data:image/png;base64,${logoBase64}`;
+
 export const invoiceTemplate = (invoiceData: {
   address: {
     recipient: string;
@@ -122,7 +127,10 @@ export const invoiceTemplate = (invoiceData: {
     <Wrapper>
       <Header>
         <img
-          src="/logo.png"
+          // this works:
+          // src="https://i.imgur.com/0pQKUnQ.png"
+
+          src={logoSrc}
           alt="logo"
           width={200}
         />
