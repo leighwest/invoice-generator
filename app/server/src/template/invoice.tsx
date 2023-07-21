@@ -1,12 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { readFileSync } from 'fs';
 
 import { IInvoiceData } from 'models/invoice';
 
-const Wrapper = styled.div`
-  padding: 40px;
+const GlobalStyle = createGlobalStyle`
+@font-face {
+   font-family: 'Open Sans';
+   src: url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
+   }
+
+  body {
+    font-family: 'Roboto', sans-serif;  }
 `;
+
+const Wrapper = styled.div``;
 
 const SubHeading = styled.h3`
   color: #7182ff;
@@ -123,6 +131,7 @@ export const invoiceTemplate = (invoiceData: IInvoiceData) => {
 
   return (
     <Wrapper>
+      <GlobalStyle />
       <Header>
         <img
           // this works:

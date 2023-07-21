@@ -29,7 +29,11 @@ export const invoiceGenerator = async (invoiceData: any) => {
   await page.addStyleTag({ content: styleTags });
 
   // Generate a PDF file from the page
-  const pdf = await page.pdf({ path: 'invoice.pdf', format: 'A4' });
+  const pdf = await page.pdf({
+    path: 'invoice.pdf',
+    format: 'A4',
+    margin: { left: '1cm', top: '1cm', right: '1cm', bottom: '1cm' },
+  });
 
   await browser.close();
 
