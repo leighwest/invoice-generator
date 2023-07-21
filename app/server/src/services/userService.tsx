@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import User, { IUser } from 'models/user';
+import { IUser } from '../models/user';
+import { User } from '../models/user';
+
 import { UserValidationError } from './userValidationService';
 
 export const saveUser = async (

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { readFileSync } from 'fs';
 
+import { IInvoiceData } from 'models/invoice';
+
 const Wrapper = styled.div`
   padding: 40px;
 `;
@@ -108,20 +110,16 @@ const logoPath = 'src/public/images/logo.png';
 const logoBase64 = readFileSync(logoPath).toString('base64');
 const logoSrc = `data:image/png;base64,${logoBase64}`;
 
-export const invoiceTemplate = (invoiceData: {
-  address: {
-    recipient: string;
-    streetAddress: string;
-    suburb: string;
-    state: string;
-    postcode: string;
-  };
-  dateIssued: string;
-  dateDue: string;
-  service: { description: string; cost: number }[];
-}) => {
+export const calcSubtotal = (service: { cost: number }[]): number => {
+  return service.reduce((acc, curr) => +acc + +curr.cost, 0);
+};
+
+export const invoiceTemplate = (invoiceData: IInvoiceData) => {
   const { recipient, streetAddress, suburb, state, postcode } =
     invoiceData.address;
+
+  const subTotal = calcSubtotal(invoiceData.service);
+  console.log(subTotal);
 
   return (
     <Wrapper>
@@ -187,7 +185,7 @@ export const invoiceTemplate = (invoiceData: {
         <TotalsSection>
           <TotalsRow>
             <p>Subtotal</p>
-            <p> $120.00</p>
+            <p>{subTotal}</p>
           </TotalsRow>
           <TotalsRow>
             <p>GST</p>

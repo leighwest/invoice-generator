@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs';
 
-import User, { IUser } from 'models/user';
+import { IUser } from 'models/user';
+
+import { User } from '../models/user';
 
 export class UserValidationError extends Error {
   constructor(message: string) {
