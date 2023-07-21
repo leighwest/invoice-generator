@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { IUser } from '../models/user';
-import { User } from '../models/user';
+import { IUser, User } from '../models/user';
 
 import { UserValidationError } from './userValidationService';
 

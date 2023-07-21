@@ -2,8 +2,7 @@ import {
   validateSignUpUser,
   UserValidationError,
 } from './userValidationService';
-import { IUser } from '../models/user';
-import { User } from '../models/user';
+import { IUser, User } from '../models/user';
 
 describe('New user validator tests', () => {
   const user: IUser = {
