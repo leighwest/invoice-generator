@@ -114,7 +114,11 @@ const FreeTextSection = styled.div`
   margin-top: 50px;
 `;
 
-const logoPath = 'src/public/images/logo.png';
+const isProduction = process.env.NODE_ENV === 'production';
+const logoPath = isProduction
+  ? '/app/public/images/logo.png'
+  : './src/public/images/logo.png';
+
 const logoBase64 = readFileSync(logoPath).toString('base64');
 const logoSrc = `data:image/png;base64,${logoBase64}`;
 
