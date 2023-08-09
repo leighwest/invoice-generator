@@ -11,7 +11,11 @@ const InvoiceDb = {
     headers.append('Authorization', `Bearer ${token}`);
 
     try {
-      fetch(`${BASEURL}5000/invoice`, {
+      const url = `${BASEURL}5000/invoice`;
+      console.log(`url to send invoice is ${url}`);
+      fetch(`${url}`, {
+        // http://127.0.0.1/:5000/users/login
+        // fetch(`:5000/invoice`, {
         method: 'POST',
         mode: 'cors',
         headers: headers,

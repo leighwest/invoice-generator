@@ -1,7 +1,5 @@
 import puppeteer from 'puppeteer';
 
-// no longer using this:
-import { templateService } from './templateService';
 import { ServerStyleSheet } from 'styled-components';
 
 import { invoiceTemplate } from 'template/invoice';

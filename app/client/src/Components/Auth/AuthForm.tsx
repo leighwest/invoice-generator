@@ -129,10 +129,18 @@ const AuthForm = () => {
     let url: string;
 
     if (isLogin) {
-      url = process.env.REACT_APP_EXISTING_USER_URL || "";
+      url = process.env.REACT_APP_EXISTING_USER_URL || 'existing_user_url';
     } else {
-      url = process.env.REACT_APP_NEW_USER_URL || "";
+      url = process.env.REACT_APP_NEW_USER_URL || 'new_user_url';
     }
+
+    console.log(`NODE_ENV is ${process.env.NODE_ENV}`);
+
+    console.log(`process.env is: ${JSON.stringify(process.env)}`);
+
+    console.log(
+      `REACT_APP_EXISTING_USER_URL is: ${process.env.REACT_APP_EXISTING_USER_URL}`,
+    );
 
     fetch(url, {
       method: 'POST',
@@ -146,11 +154,12 @@ const AuthForm = () => {
       },
     })
       .then((res) => {
+        console.log(`Sent fetch request to url: ${url}`);
         if (res.ok) {
           return res.json();
         } else {
           // TODO: Handle failure better
-          throw new Error("Request failed")
+          throw new Error('Request failed');
         }
       })
       .then((data) => {
@@ -196,10 +205,7 @@ const AuthForm = () => {
           </InputDiv>
         )}
         <ActionDiv>
-          <button
-            type="submit">
-            {isLogin ? 'Login' : 'Create Account'}
-          </button>
+          <button type="submit">{isLogin ? 'Login' : 'Create Account'}</button>
         </ActionDiv>
         <ToggleButton
           onClick={switchAuthModeHandler}
