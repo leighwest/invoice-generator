@@ -7,15 +7,12 @@ const InvoiceDb = {
 
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/pdf');
-    headers.append('Origin', `${BASEURL}${process.env.PORT}`);
+    headers.append('Origin', `${BASEURL}80`);
     headers.append('Authorization', `Bearer ${token}`);
 
     try {
-      const url = `${BASEURL}5000/invoice`;
-      console.log(`url to send invoice is ${url}`);
-      fetch(`${url}`, {
-        // http://127.0.0.1/:5000/users/login
-        // fetch(`:5000/invoice`, {
+      const url = process.env.REACT_APP_INVOICE_URL!;
+      fetch(url, {
         method: 'POST',
         mode: 'cors',
         headers: headers,
