@@ -169,8 +169,7 @@ const AuthForm = () => {
         console.log(`Sent fetch request to url: ${url}`);
         if (res.status === 401) {
           setIsInvalidCreds(true);
-        }
-        if (res.ok) {
+        } else if (res.ok) {
           return res.json();
         } else {
           // TODO: Handle failure better
