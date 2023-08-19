@@ -35,7 +35,7 @@ const InputDiv = styled.div`
     color: #38015c;
     border-radius: 4px;
     border: 1px solid white;
-    width: 100%;
+    width: 98%;
     text-align: left;
     padding: 0.25rem;
   }
@@ -78,6 +78,17 @@ const ToggleButton = styled.button`
   }
 `;
 
+const ErrorDiv = styled.div`
+  border-radius: 6px;
+  border: 1px solid red;
+  color: red;
+  text-align: left;
+  background-color: white;
+  height: 1.5rem;
+  padding: 0.25rem;
+  width: 98%;
+`;
+
 export const passwordValidator = (
   password: string,
   password2: string,
@@ -102,6 +113,7 @@ const AuthForm = () => {
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState(true);
+  const [isInvalidCreds, setIsInvalidCreds] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogin((current) => !current);
@@ -155,6 +167,9 @@ const AuthForm = () => {
     })
       .then((res) => {
         console.log(`Sent fetch request to url: ${url}`);
+        if (res.status === 401) {
+          setIsInvalidCreds(true);
+        }
         if (res.ok) {
           return res.json();
         } else {
@@ -167,7 +182,8 @@ const AuthForm = () => {
         navigate('/create-invoice');
       })
       .catch((err) => {
-        alert(err.message);
+        console.error(err.message);
+        // how else can I handle this?
       });
   };
 
@@ -182,6 +198,7 @@ const AuthForm = () => {
             id="email"
             ref={emailInputRef}
             required
+            onFocus={() => setIsInvalidCreds(false)}
           />
         </InputDiv>
         <InputDiv>
@@ -191,6 +208,7 @@ const AuthForm = () => {
             id="password"
             ref={passwordInputRef}
             required
+            onFocus={() => setIsInvalidCreds(false)}
           />
         </InputDiv>
         {!isLogin && (
@@ -203,6 +221,11 @@ const AuthForm = () => {
               required
             />
           </InputDiv>
+        )}
+        {isInvalidCreds && (
+          <ErrorDiv>
+            <span>Incorrect username or password. Please try again.</span>
+          </ErrorDiv>
         )}
         <ActionDiv>
           <button type="submit">{isLogin ? 'Login' : 'Create Account'}</button>

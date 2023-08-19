@@ -50,7 +50,7 @@ export const login: RequestHandler = async (req, res) => {
     });
 
     console.error(validationErrors);
-    return res.status(422).json(validationErrorMessages);
+    return res.status(401).json(validationErrorMessages);
   }
 
   const user = await createUserSession(req.body.email);
